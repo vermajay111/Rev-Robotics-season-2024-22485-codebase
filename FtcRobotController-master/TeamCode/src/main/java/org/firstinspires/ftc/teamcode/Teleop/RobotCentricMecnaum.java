@@ -55,19 +55,19 @@ public class RobotCentricMecnaum extends LinearOpMode {
             if (gamepad1.back){
                 if(RobotOrientation.getYaw(AngleUnit.DEGREES) > 0){
                     while(RobotOrientation.getYaw(AngleUnit.DEGREES) > 0) {
-                        frontLeftMotor.setPower(0.7);
-                        backLeftMotor.setPower(0.7);
-                        frontRightMotor.setPower(-0.7);
-                        backRightMotor.setPower(-0.7);
+                        frontLeftMotor.setPower(0.4);
+                        backLeftMotor.setPower(0.4);
+                        frontRightMotor.setPower(-0.4);
+                        backRightMotor.setPower(-0.4);
                         RobotOrientation = imu.getRobotYawPitchRollAngles();
                         telemetry.update();
                     }
                 } else if(RobotOrientation.getYaw(AngleUnit.DEGREES) < 0) {
                     while (RobotOrientation.getYaw(AngleUnit.DEGREES) < 0) {
-                        frontLeftMotor.setPower(-0.7);
-                        backLeftMotor.setPower(-0.7);
-                        frontRightMotor.setPower(0.7);
-                        backRightMotor.setPower(0.7);
+                        frontLeftMotor.setPower(-0.4);
+                        backLeftMotor.setPower(-0.4);
+                        frontRightMotor.setPower(0.4);
+                        backRightMotor.setPower(0.4);
                         RobotOrientation = imu.getRobotYawPitchRollAngles();
                         telemetry.update();
                     }
