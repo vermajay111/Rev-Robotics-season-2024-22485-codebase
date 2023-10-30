@@ -26,6 +26,12 @@ public class RobotCentricMecnaum extends LinearOpMode {
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("leftRear");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
         DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
+
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT)));
         RobotOrientation = imu.getRobotYawPitchRollAngles();
