@@ -5,9 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@TeleOp
+@TeleOp(name = "FieldCentricMecnaum")
 public class FieldCentricTwo extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -16,6 +18,8 @@ public class FieldCentricTwo extends LinearOpMode {
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("leftRear");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
         DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
+        Servo DroneLauncher = hardwareMap.get(Servo.class, "DroneLauncher");
+        DroneLauncher = hardwareMap.get(Servo.class, "DroneLauncher");
 
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -53,6 +57,13 @@ public class FieldCentricTwo extends LinearOpMode {
                telemetry.addData("trggired", "Yes");
             }
 
+
+            if (gamepad1.y) {
+                DroneLauncher.setPosition(0);
+            } else if (gamepad1.b) {
+                DroneLauncher.setPosition(1);
+            }
+
             double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
             double rotX = x * Math.cos(-botHeading) - up * Math.sin(-botHeading);
@@ -82,8 +93,6 @@ public class FieldCentricTwo extends LinearOpMode {
             telemetry.addData("backRightPower", backRightPower);
 
             telemetry.update();
-
-
 
         }
     }

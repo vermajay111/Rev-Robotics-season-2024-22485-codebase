@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
-@TeleOp(name = "Mecnaum")
+@TeleOp(name = "RobotCentricMecnaum")
 public class RobotCentricMecnaum extends LinearOpMode {
     private DistanceSensor distanceSensorFront;
     //private DistanceSensor distanceSensorBack;
