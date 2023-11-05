@@ -40,11 +40,17 @@ public class FieldCentricTwo extends LinearOpMode {
         waitForStart();
 
         if (isStopRequested()) return;
-
+        double max_speed = 1.0;
         while (opModeIsActive()) {
             double up = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
+
+            if(gamepad1.dpad_down && max_speed >= 0){
+                max_speed -= 0.1;
+            } else if(gamepad1.dpad_up && max_speed <= 1.0 ){
+                max_speed += 0.1;
+            }
 
            if (gamepad1.a) {
                imu = hardwareMap.get(IMU.class, "imu");
@@ -54,7 +60,6 @@ public class FieldCentricTwo extends LinearOpMode {
                imu.initialize(parameters);
                imu.resetYaw();
                double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-               telemetry.addData("trggired", "Yes");
             }
 
 
@@ -73,24 +78,23 @@ public class FieldCentricTwo extends LinearOpMode {
             //rotX = rotX * 1.1;
 
             double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-            double frontLeftPower = (rotY + rotX + rx) / denominator;
-            double backLeftPower = (rotY - rotX + rx) / denominator;
-            double frontRightPower = (rotY - rotX - rx) / denominator;
-            double backRightPower = (rotY + rotX - rx) / denominator;
+            double frontLeftPower = ((rotY + rotX + rx) / denominator) * max_speed;
+            double backLeftPower = ((rotY - rotX + rx) / denominator) * max_speed;
+            double frontRightPower = ((rotY - rotX - rx) / denominator) * max_speed;
+            double backRightPower = ((rotY + rotX - rx) / denominator) * max_speed;
 
 
-
-
-            frontLeftMotor.setPower(frontLeftPower * 0.9);
-            backLeftMotor.setPower(backLeftPower * 0.9);
-            frontRightMotor.setPower(frontRightPower * 0.9);
-            backRightMotor.setPower(backRightPower * 0.9);
+            frontLeftMotor.setPower(frontLeftPower);
+            backLeftMotor.setPower(backLeftPower);
+            frontRightMotor.setPower(frontRightPower);
+            backRightMotor.setPower(backRightPower);
 
             telemetry.addData("IMU X", botHeading);
             telemetry.addData("front left power", frontLeftPower);
             telemetry.addData("backLeftMotor", backLeftPower);
             telemetry.addData("frontRightMotor", frontRightPower);
             telemetry.addData("backRightPower", backRightPower);
+            telemetry.addData("Max_Speed", max_speed);
 
             telemetry.update();
 

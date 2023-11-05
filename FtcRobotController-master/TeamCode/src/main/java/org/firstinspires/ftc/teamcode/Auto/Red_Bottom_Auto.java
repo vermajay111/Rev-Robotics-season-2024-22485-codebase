@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-
-@Autonomous(name="Bottom_Red")
+//102 in
+@Autonomous(name="Bottom_Blue")
 public class Red_Bottom_Auto extends LinearOpMode {
 
     @Override
@@ -20,16 +20,26 @@ public class Red_Bottom_Auto extends LinearOpMode {
         if (isStopRequested()) return;
 
         Trajectory traj = drive.trajectoryBuilder(new Pose2d())
-                .strafeRight(2)
+                .strafeRight(3)
                 .build();
 
         Trajectory traj1 = drive.trajectoryBuilder(new Pose2d())
-                .forward(70)
+                .forward(45)
                 .build();
+
+        Trajectory traj2 = drive.trajectoryBuilder(new Pose2d())
+                .strafeRight(10)
+                .build();
+
+        Trajectory traj3 = drive.trajectoryBuilder(new Pose2d())
+                .forward(20)
+                .build();
+
 
 
         drive.followTrajectory(traj);
         drive.followTrajectory(traj1);
-
+        drive.followTrajectory(traj2);
+        drive.followTrajectory(traj3);
     }
 }

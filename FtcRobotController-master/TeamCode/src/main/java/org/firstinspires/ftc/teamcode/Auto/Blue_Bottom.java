@@ -7,22 +7,39 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-//60 in
-@Autonomous(name="Top_Position_Blue")
-public class AutoMode_Red_Front extends LinearOpMode {
+//102 in
+@Autonomous(name="Bottom_Red")
+public class Blue_Bottom extends LinearOpMode {
+
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         waitForStart();
 
-        if (isStopRequested()) return;
 
-        Trajectory traj1 = drive.trajectoryBuilder(new Pose2d())
-                .strafeLeft(25)
+        Trajectory traj = drive.trajectoryBuilder(new Pose2d())
+                .strafeLeft(3)
                 .build();
 
+        Trajectory traj1 = drive.trajectoryBuilder(new Pose2d())
+                .forward(45)
+                .build();
+
+        Trajectory traj2 = drive.trajectoryBuilder(new Pose2d())
+                .strafeLeft(10)
+                .build();
+
+        Trajectory traj3 = drive.trajectoryBuilder(new Pose2d())
+                .forward(20)
+                .build();
+
+
+
+        drive.followTrajectory(traj);
         drive.followTrajectory(traj1);
+        drive.followTrajectory(traj2);
+        drive.followTrajectory(traj3);
 
     }
 }
