@@ -89,21 +89,14 @@ public class FieldCentricMecnaumDrive extends LinearOpMode {
                 up = -0.5;
             }
 
-
             double rotX = x * Math.cos(-botHeading) - up * Math.sin(-botHeading);
             double rotY = x * Math.sin(-botHeading) + up * Math.cos(-botHeading);
-
-
             rotX = rotX * 1.1;
-
             double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
             double frontLeftPower = ((rotY + rotX + rx) / denominator);
             double backLeftPower = ((rotY - rotX + rx) / denominator);
             double frontRightPower = ((rotY - rotX - rx) / denominator );
             double backRightPower = ((rotY + rotX - rx) / denominator);
-
-
-
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);

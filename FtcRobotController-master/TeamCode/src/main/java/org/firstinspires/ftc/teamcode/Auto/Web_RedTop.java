@@ -21,7 +21,7 @@ import java.util.List;
 public class Web_RedTop extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;
-    private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/main.tflite";
+    private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/model_main.tflite";
 
     private static final String[] LABELS = {
             "Prop",
@@ -66,33 +66,30 @@ public class Web_RedTop extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.55f);
+        tfod.setMinResultConfidence(0.75f);
 
     }
 
     private void telemetryTfod(long startTime) {
         List<Recognition> currentRecognitions = tfod.getRecognitions();
-        //telemetry.addData("# Objects Detected", currentRecognitions.size());
-        int bond = 220;
+        int bond = 570;
         long currentTime = System.nanoTime();
         long time = (currentTime - startTime) / 1000000;
 
-        if (time > 10000){
+        if (time > 9000){
             Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
             SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-            telemetry.addLine("Time up");
+            telemetry.addLine("Left Spike");
+            telemetry.update();
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                    .strafeLeft(5)
+                    .strafeRight(5)
                     .forward(26)
-                    .turn(Math.toRadians(-90))
-                    .forward(23)
-                    .back(12)
                     .turn(Math.toRadians(90))
-                    .forward(27)
+                    .forward(15)
+                    .back(13)
                     .turn(Math.toRadians(-90))
-                    .forward(60)
-                    .strafeRight(7)
-                    .forward(20)
+                    .back(25)
+                    .strafeRight(45)
                     .build();
             drive.followTrajectorySequence(trajSeq);
             requestOpModeStop();
@@ -103,49 +100,38 @@ public class Web_RedTop extends LinearOpMode {
             telemetry.addData("X", x);
             telemetry.update();
             if(x > bond){
-                telemetry.addLine("Center");
+                telemetry.addLine("Right Spike");
                 telemetry.update();
-
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(34)
-                        .back(15)
-                        .strafeLeft(15)
-                        .forward(30)
-                        .turn(Math.toRadians(-90))
-                        .forward(105)
+                        .forward(23)
+                        .strafeRight(9)
+                        .back(22)
+                        .strafeRight(42)
                         .build();
 
                 waitForStart();
-
                 if (isStopRequested()) return;
 
                 drive.followTrajectorySequence(trajSeq);
                 Pose2d poseEstimate = drive.getPoseEstimate();
                 requestOpModeStop();
-
-
-            } else{
-                telemetry.addLine("Left spike");
+            } else {
+                telemetry.addLine("Center spike");
                 telemetry.update();
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(15)
-                        .strafeLeft(12)
-                        .forward(11)
-                        .back(11)
-                        .strafeRight(13)
-                        .forward(35)
-                        .turn(Math.toRadians(-90))
-                        .forward(90)
+
+                        .forward(33)
+                        .back(31)
+                        .strafeRight(45)
                         .build();
 
                 drive.followTrajectorySequence(trajSeq);
                 requestOpModeStop();
-                //Pose2d poseEstimate = drive.getPoseEstimate();
             }
         }
 

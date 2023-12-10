@@ -66,7 +66,7 @@ public class Web_RedBack extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.55f);
+        tfod.setMinResultConfidence(0.75f);
 
     }
 
@@ -101,7 +101,7 @@ public class Web_RedBack extends LinearOpMode {
             telemetry.addData("X", x);
             telemetry.update();
             if(x > bond){
-                telemetry.addLine("Center");
+                telemetry.addLine("Center Spike");
                 telemetry.update();
 
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());

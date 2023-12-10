@@ -66,13 +66,12 @@ public class Web_BlueBack extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.55f);
+        tfod.setMinResultConfidence(0.75f);
 
     }
 
     private void telemetryTfod(long startTime) {
         List<Recognition> currentRecognitions = tfod.getRecognitions();
-        //telemetry.addData("# Objects Detected", currentRecognitions.size());
         int bond = 570;
         long currentTime = System.nanoTime();
         long time = (currentTime - startTime) / 1000000;
@@ -81,6 +80,7 @@ public class Web_BlueBack extends LinearOpMode {
             Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
             SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
             telemetry.addLine("Left Spike");
+            telemetry.update();
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
                     .strafeRight(5)
                     .forward(26)
@@ -106,24 +106,22 @@ public class Web_BlueBack extends LinearOpMode {
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(33)
-                        .back(15)
-                        .strafeRight(15)
-                        .forward(30)
+                        .forward(23)
+                        .strafeRight(9)
+                        //.forward(11)
+                        .back(11)
+                        .strafeLeft(13)
+                        .forward(40)
                         .turn(Math.toRadians(90))
-                        .forward(105)
+                        .forward(90)
                         .build();
 
                 waitForStart();
-
-
                 if (isStopRequested()) return;
 
                 drive.followTrajectorySequence(trajSeq);
                 Pose2d poseEstimate = drive.getPoseEstimate();
                 requestOpModeStop();
-
-
             } else {
                 telemetry.addLine("Center spike");
                 telemetry.update();
@@ -142,7 +140,6 @@ public class Web_BlueBack extends LinearOpMode {
 
                 drive.followTrajectorySequence(trajSeq);
                 requestOpModeStop();
-                //Pose2d poseEstimate = drive.getPoseEstimate();
             }
         }
 

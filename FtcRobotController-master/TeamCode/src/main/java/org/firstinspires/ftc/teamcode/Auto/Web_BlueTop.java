@@ -17,7 +17,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "Web_BlueBack")
+@Autonomous(name = "Web_BlueTop")
 public class Web_BlueTop extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;
@@ -66,56 +66,51 @@ public class Web_BlueTop extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.55f);
+        tfod.setMinResultConfidence(0.75f);
 
     }
 
     private void telemetryTfod(long startTime) {
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         //telemetry.addData("# Objects Detected", currentRecognitions.size());
-        int bond = 570;
+        int bond = 220;
         long currentTime = System.nanoTime();
         long time = (currentTime - startTime) / 1000000;
 
         if (time > 9000){
             Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
             SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-            telemetry.addLine("Left Spike");
+            telemetry.addLine("Right Spike");
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                    .strafeRight(5)
-                    .forward(26)
-                    .turn(Math.toRadians(90))
+                    .strafeLeft(5)
+                    .forward(25)
+                    .turn(Math.toRadians(-90))
                     .forward(15)
                     .back(13)
-                    .turn(Math.toRadians(-90))
-                    .forward(23)
                     .turn(Math.toRadians(90))
-                    .forward(100)
+                    .back(24)
+                    .strafeLeft(45)
                     .build();
             drive.followTrajectorySequence(trajSeq);
             requestOpModeStop();
         }
-
         for (Recognition recognition : currentRecognitions) {
             double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
             telemetry.addData("X", x);
             telemetry.update();
             if(x > bond){
-                telemetry.addLine("Right Spike");
+                telemetry.addLine("Center Spike");
                 telemetry.update();
+
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(33)
-                        .back(15)
-                        .strafeRight(15)
-                        .forward(30)
-                        .turn(Math.toRadians(90))
-                        .forward(105)
+                        .forward(32)
+                        .back(31)
+                        .strafeLeft(45)
                         .build();
 
                 waitForStart();
-
 
                 if (isStopRequested()) return;
 
@@ -124,20 +119,18 @@ public class Web_BlueTop extends LinearOpMode {
                 requestOpModeStop();
 
 
-            } else {
-                telemetry.addLine("Center spike");
+            } else{
+                telemetry.addLine("Left spike");
                 telemetry.update();
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-
-                        .forward(33)
-                        .back(15)
-                        .strafeRight(15)
-                        .forward(30)
-                        .turn(Math.toRadians(90))
-                        .forward(105)
+                        .forward(26)
+                        .strafeLeft(9)
+                        //.forward(11)
+                        .back(25.5)
+                        .strafeLeft(42)
                         .build();
 
                 drive.followTrajectorySequence(trajSeq);
