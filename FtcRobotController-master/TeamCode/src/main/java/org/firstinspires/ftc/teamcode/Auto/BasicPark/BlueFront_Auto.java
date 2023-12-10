@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+//remove disabled for this to show up in the driver hub and then upload it again to the robot
 @Autonomous(name = "BlueFront_Auto")
 @Disabled()
 public class BlueFront_Auto extends LinearOpMode {

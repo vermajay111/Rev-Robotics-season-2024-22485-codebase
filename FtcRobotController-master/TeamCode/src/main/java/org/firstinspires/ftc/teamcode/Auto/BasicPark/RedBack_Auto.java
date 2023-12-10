@@ -11,6 +11,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
+
+//remove disabled for this to show up in the driver hub and then upload it again to the robot
 @Autonomous(name = "BlueBack_Auto")
 @Disabled()
 public class RedBack_Auto extends LinearOpMode {
