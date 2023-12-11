@@ -17,7 +17,6 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Disabled()
 public class RedFront_Auto extends LinearOpMode {
     public static double DISTANCE = 45; // in
-
     @Override
     public void runOpMode() throws InterruptedException {
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -29,17 +28,13 @@ public class RedFront_Auto extends LinearOpMode {
                 .build();
 
         waitForStart();
-
         if (isStopRequested()) return;
-
         drive.followTrajectory(trajectory);
-
         Pose2d poseEstimate = drive.getPoseEstimate();
         telemetry.addData("finalX", poseEstimate.getX());
         telemetry.addData("finalY", poseEstimate.getY());
         telemetry.addData("finalHeading", poseEstimate.getHeading());
         telemetry.update();
-
         while (!isStopRequested() && opModeIsActive()) ;
     }
 }

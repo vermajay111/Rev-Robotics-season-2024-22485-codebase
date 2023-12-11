@@ -66,7 +66,7 @@ public class Web_RedTop extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.80f);
 
     }
 
@@ -85,7 +85,7 @@ public class Web_RedTop extends LinearOpMode {
                     .strafeRight(5)
                     .forward(26)
                     .turn(Math.toRadians(90))
-                    .forward(15)
+                    .forward(15.5)
                     .back(13)
                     .turn(Math.toRadians(-90))
                     .back(25)
@@ -105,8 +105,8 @@ public class Web_RedTop extends LinearOpMode {
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(23)
-                        .strafeRight(9)
+                        .forward(24.5)
+                        .strafeRight(8)
                         .back(22)
                         .strafeRight(42)
                         .build();
@@ -125,7 +125,7 @@ public class Web_RedTop extends LinearOpMode {
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
 
-                        .forward(33)
+                        .forward(32)
                         .back(31)
                         .strafeRight(45)
                         .build();

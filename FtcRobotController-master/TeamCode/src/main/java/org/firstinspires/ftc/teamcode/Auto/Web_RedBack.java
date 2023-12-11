@@ -66,7 +66,7 @@ public class Web_RedBack extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.80f);
 
     }
 
@@ -132,11 +132,11 @@ public class Web_RedBack extends LinearOpMode {
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
                         .forward(23)
-                        .strafeLeft(9)
+                        .strafeLeft(8.5)
                         //.forward(11)
                         .back(11)
                         .strafeRight(13)
-                        .forward(40)
+                        .forward(39)
                         .turn(Math.toRadians(-90))
                         .forward(90)
                         .build();

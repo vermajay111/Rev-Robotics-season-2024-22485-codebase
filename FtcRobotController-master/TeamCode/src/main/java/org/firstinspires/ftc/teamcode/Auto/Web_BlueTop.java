@@ -66,7 +66,7 @@ public class Web_BlueTop extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.80f);
 
     }
 
@@ -85,11 +85,11 @@ public class Web_BlueTop extends LinearOpMode {
                     .strafeLeft(5)
                     .forward(25)
                     .turn(Math.toRadians(-90))
-                    .forward(15)
+                    .forward(14.5)
                     .back(13)
                     .turn(Math.toRadians(90))
                     .back(24)
-                    .strafeLeft(45)
+                    .strafeLeft(44)
                     .build();
             drive.followTrajectorySequence(trajSeq);
             requestOpModeStop();
@@ -105,7 +105,8 @@ public class Web_BlueTop extends LinearOpMode {
                 Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
-                        .forward(32)
+                        .strafeRight(4)
+                        .forward(31.5)
                         .back(31)
                         .strafeLeft(45)
                         .build();
@@ -118,7 +119,6 @@ public class Web_BlueTop extends LinearOpMode {
                 Pose2d poseEstimate = drive.getPoseEstimate();
                 requestOpModeStop();
 
-
             } else{
                 telemetry.addLine("Left spike");
                 telemetry.update();
@@ -127,7 +127,7 @@ public class Web_BlueTop extends LinearOpMode {
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
                         .forward(26)
-                        .strafeLeft(9)
+                        .strafeLeft(8.5)
                         //.forward(11)
                         .back(25.5)
                         .strafeLeft(42)

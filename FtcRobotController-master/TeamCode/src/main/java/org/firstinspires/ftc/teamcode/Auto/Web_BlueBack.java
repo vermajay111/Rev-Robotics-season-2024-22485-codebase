@@ -66,7 +66,7 @@ public class Web_BlueBack extends LinearOpMode {
 
         builder.addProcessor(tfod);
         visionPortal = builder.build();
-        tfod.setMinResultConfidence(0.75f);
+        tfod.setMinResultConfidence(0.80f);
 
     }
 
@@ -130,7 +130,7 @@ public class Web_BlueBack extends LinearOpMode {
 
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(new Pose2d())
 
-                        .forward(33)
+                        .forward( 32)
                         .back(15)
                         .strafeRight(15)
                         .forward(30)
